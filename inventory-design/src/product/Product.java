@@ -3,85 +3,67 @@ package product;
 import enumeration.ProductCategory;
 
 public abstract class Product {
-    // Core attributes
-    private final String sku;
-    private final String name;
-    private final double price;
-    private int quantity; // optional
-    private final int threshold; // optional
-    private final ProductCategory category;
+    private String sku;
+    private String name;
+    private double price;
+    private int quantity;
+    private int threshold;
+    private ProductCategory category;
 
-    // Protected constructor to be used by concrete builders
-    protected Product(Builder<?> builder) {
-        this.sku = builder.sku;
-        this.name = builder.name;
-        this.price = builder.price;
-        this.quantity = builder.quantity;
-        this.threshold = builder.threshold;
-        this.category = builder.category;
-    }
-
-    // Getters
+    // Getters and setters
     public String getSku() {
         return sku;
     }
-    public String getName() {
-        return name;
-    }
-    public double getPrice() {
-        return price;
-    }
-    public int getQuantity() {
-        return quantity;
-    }
+
     public int getThreshold() {
         return threshold;
     }
-    public ProductCategory getCategory() {
-        return category;
+
+    public void setThreshold(int threshold) {
+        this.threshold = threshold;
     }
 
-    // Setters only for mutable properties
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    // Abstract Builder class
-    public static abstract class Builder<T extends Builder<T>> {
-        // Required parameters
-        private final String sku;
-        private final String name;
-        private final double price;
-        private final ProductCategory category;
+    public ProductCategory getCategory() {
+        return category;
+    }
 
-        // Optional parameters with default values
-        private int quantity = 0;
-        private int threshold = 10;
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
 
-        // Constructor with required parameters
-        public Builder(
-                String sku, String name, double price, ProductCategory category) {
-            this.sku = sku;
-            this.name = name;
-            this.price = price;
-            this.category = category;
-        }
+    public void addStock(int quantity) {
+        this.quantity=this.quantity+quantity;
+    }
 
-        // Methods to set optional parameters
-        public T quantity(int quantity) {
-            this.quantity = quantity;
-            return self();
-        }
-
-        public T threshold(int threshold) {
-            this.threshold = threshold;
-            return self();
-        }
-
-        // Method to be overridden by subclasses to return this (the current object)
-        protected abstract T self();
-
-        // Build method to be implemented by concrete builders
-        public abstract Product build();
+    public void removeStock(int quantity) {
+        this.quantity=this.quantity+quantity;
     }
 }
