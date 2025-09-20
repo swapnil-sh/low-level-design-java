@@ -19,7 +19,6 @@ public class GroceryProduct extends Product {
         setThreshold(threshold);
     }
 
-    // Getters and setters for grocery-specific attributes
     public Date getExpiryDate() {
         return expiryDate;
     }

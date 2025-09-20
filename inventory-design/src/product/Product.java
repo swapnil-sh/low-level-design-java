@@ -64,6 +64,6 @@ public abstract class Product {
     }
 
     public void removeStock(int quantity) {
-        this.quantity=this.quantity+quantity;
+        this.quantity=this.quantity-quantity;
     }
 }
