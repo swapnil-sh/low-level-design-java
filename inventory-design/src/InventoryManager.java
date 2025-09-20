@@ -12,12 +12,19 @@ public class InventoryManager {
     private List<Warehouse> warehouses;
     private ProductFactory productFactory;
     private ReplenishmentStrategy replenishmentStrategy;
+    private InventoryObserver supplierNotifier;
+    private InventoryObserver dashboardAlertNotifier;
+
 
     // Private constructor to prevent instantiation from outside
     private InventoryManager() {
         // Initialize collections and dependencies
         warehouses = new ArrayList<>();
         productFactory = new ProductFactory();
+        List<String> admins =  new ArrayList<>();
+        admins.add("ADMIN1");
+        dashboardAlertNotifier = new DashboardAlertSystem("1", admins);
+        supplierNotifier = new SupplierNotifier("ABC", "supp1@gmail.com");
     }
 
     // Static method to get the singleton instance with thread safety
@@ -69,6 +76,8 @@ public class InventoryManager {
     }
 
     private void notifyObservers(Product product) {
+        supplierNotifier.update(product);
+        dashboardAlertNotifier.update(product);
     }
 
     // Global inventory check
